@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.accounting.controller.MainController" fx:id="mainPane">
+   <right>
+      <VBox fx:id="sideMenu" prefWidth="250.0" styleClass="side-menu" BorderPane.alignment="CENTER">
+         <children>
+            <Label styleClass="app-title" text="نظام المحاسبة">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="30.0" left="20.0" right="20.0" top="20.0" />
+               </VBox.margin>
+            </Label>
+            <Button fx:id="dataEntryBtn" mnemonicParsing="false" onAction="#showDataEntry" prefHeight="50.0" prefWidth="200.0" styleClass="menu-button" text="إدخال البيانات">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="25.0" right="25.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="viewDataBtn" mnemonicParsing="false" onAction="#showViewData" prefHeight="50.0" prefWidth="200.0" styleClass="menu-button" text="عرض البيانات">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="25.0" right="25.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="employeesBtn" mnemonicParsing="false" onAction="#showEmployees" prefHeight="50.0" prefWidth="200.0" styleClass="menu-button" text="الموظفون">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="25.0" right="25.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="settingsBtn" mnemonicParsing="false" onAction="#showSettings" prefHeight="50.0" prefWidth="200.0" styleClass="menu-button" text="الإعدادات">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="25.0" right="25.0" />
+               </VBox.margin>
+            </Button>
+            <Region VBox.vgrow="ALWAYS" />
+            <Label fx:id="currencyLabel" styleClass="currency-info" text="USD (1 USD = 89500 LBP)">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+      </VBox>
+   </right>
+</BorderPane>

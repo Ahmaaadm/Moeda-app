@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.accounting.controller.EmployeesController" spacing="20.0" styleClass="content-pane" nodeOrientation="RIGHT_TO_LEFT">
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+   <children>
+      <Label styleClass="page-title" text="إدارة الموظفين" />
+      <HBox spacing="20.0">
+         <children>
+            <VBox spacing="15.0" styleClass="form-container" HBox.hgrow="NEVER">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <children>
+                  <Label styleClass="section-title" text="بيانات الموظف" />
+                  <VBox spacing="10.0">
+                     <children>
+                        <Label styleClass="form-label" text="اسم الموظف:" />
+                        <TextField fx:id="nameField" prefWidth="250.0" promptText="أدخل اسم الموظف" />
+                     </children>
+                  </VBox>
+                  <HBox alignment="CENTER" spacing="10.0">
+                     <children>
+                        <Button fx:id="addBtn" onAction="#addEmployee" prefWidth="80.0" styleClass="primary-button" text="إضافة" />
+                        <Button fx:id="updateBtn" onAction="#updateEmployee" prefWidth="80.0" styleClass="secondary-button" text="تحديث" />
+                        <Button fx:id="deleteBtn" onAction="#deleteEmployee" prefWidth="80.0" styleClass="danger-button" text="حذف" />
+                        <Button fx:id="clearBtn" onAction="#clearForm" prefWidth="80.0" styleClass="secondary-button" text="مسح" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label styleClass="section-title" text="قائمة الموظفين" />
+                  <TableView fx:id="employeesTable" VBox.vgrow="ALWAYS">
+                     <columns>
+                        <TableColumn fx:id="idCol" prefWidth="80.0" text="الرقم" />
+                        <TableColumn fx:id="nameCol" prefWidth="300.0" text="الاسم" />
+                     </columns>
+                  </TableView>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</VBox>

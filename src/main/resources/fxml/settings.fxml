@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.accounting.controller.SettingsController" spacing="20.0" styleClass="content-pane" nodeOrientation="RIGHT_TO_LEFT">
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+   <children>
+      <Label styleClass="page-title" text="الإعدادات" />
+      <VBox spacing="20.0" styleClass="form-container">
+         <padding>
+            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+         </padding>
+         <children>
+            <Label styleClass="section-title" text="إعدادات العملة" />
+            <VBox spacing="15.0">
+               <children>
+                  <Label styleClass="form-label" text="العملة المستخدمة:" />
+                  <VBox spacing="10.0">
+                     <children>
+                        <RadioButton fx:id="usdRadio" styleClass="radio-button" text="دولار أمريكي (USD)" />
+                        <RadioButton fx:id="lbpRadio" styleClass="radio-button" text="ليرة لبنانية (LBP)" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <VBox spacing="10.0">
+               <children>
+                  <Label styleClass="form-label" text="سعر صرف الدولار مقابل الليرة:" />
+                  <TextField fx:id="exchangeRateField" prefWidth="200.0" promptText="أدخل سعر الصرف" />
+                  <Label styleClass="help-text" text="يستخدم هذا السعر لتحويل العملة عند العرض" />
+               </children>
+            </VBox>
+            <HBox alignment="CENTER">
+               <children>
+                  <Button fx:id="saveBtn" onAction="#saveSettings" prefWidth="120.0" styleClass="primary-button" text="حفظ الإعدادات" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</VBox>
