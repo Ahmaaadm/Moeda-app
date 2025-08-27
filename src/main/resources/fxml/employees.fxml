@@ -48,4 +48,5 @@
          </children>
       </HBox>
    </children>
+   <Label text="© 2025 Ahmad Moussa" styleClass="footer-label"/>
 </VBox>

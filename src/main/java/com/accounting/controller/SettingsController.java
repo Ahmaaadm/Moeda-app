@@ -47,7 +47,7 @@ public class SettingsController implements Initializable {
     
     private void loadCurrentSettings() {
         String currency = currencyManager.getCurrentCurrency();
-        if ("USD".equals(currency)) {
+        if ("Kz".equals(currency)) {
             usdRadio.setSelected(true);
         } else {
             lbpRadio.setSelected(true);
@@ -59,7 +59,7 @@ public class SettingsController implements Initializable {
     
     @FXML
     private void saveSettings() {
-        String selectedCurrency = usdRadio.isSelected() ? "USD" : "LBP";
+        String selectedCurrency = usdRadio.isSelected() ? "Kz" : "USD";
         
         double exchangeRate = 1.0;
         if (usdRadio.isSelected()) {

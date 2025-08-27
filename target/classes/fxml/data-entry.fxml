@@ -6,7 +6,7 @@
 
 <VBox xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.accounting.controller.DataEntryController" spacing="20.0" styleClass="content-pane" nodeOrientation="RIGHT_TO_LEFT">
    <padding>
-      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+      <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
    </padding>
    <children>
       <Label styleClass="page-title" text="إدخال البيانات" />
@@ -14,21 +14,21 @@
          <tabs>
             <Tab text="المبيعات">
                <content>
-                  <VBox spacing="15.0" styleClass="form-container">
+                  <VBox spacing="20.0" styleClass="form-container">
                      <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
                      <children>
-                        <GridPane hgap="15.0" vgap="15.0">
+                        <GridPane hgap="20.0" vgap="25.0">
                            <columnConstraints>
-                              <ColumnConstraints hgrow="NEVER" minWidth="120.0" prefWidth="150.0" maxWidth="200.0" />
-                              <ColumnConstraints hgrow="ALWAYS" minWidth="200.0" prefWidth="350.0" />
+                              <ColumnConstraints hgrow="NEVER" minWidth="100.0" prefWidth="130.0" maxWidth="160.0" />
+                              <ColumnConstraints hgrow="ALWAYS" minWidth="150.0" prefWidth="250.0" />
                            </columnConstraints>
                            <rowConstraints>
-                              <RowConstraints minHeight="35.0" prefHeight="40.0" vgrow="NEVER" />
-                              <RowConstraints minHeight="35.0" prefHeight="40.0" vgrow="NEVER" />
-                              <RowConstraints minHeight="35.0" prefHeight="40.0" vgrow="NEVER" />
-                              <RowConstraints minHeight="35.0" prefHeight="40.0" vgrow="NEVER" />
+                              <RowConstraints minHeight="35.0" prefHeight="45.0" vgrow="NEVER" />
+                              <RowConstraints minHeight="35.0" prefHeight="45.0" vgrow="NEVER" />
+                              <RowConstraints minHeight="35.0" prefHeight="45.0" vgrow="NEVER" />
+                              <RowConstraints minHeight="35.0" prefHeight="45.0" vgrow="NEVER" />
                            </rowConstraints>
                            <children>
                               <Label styleClass="form-label" text="الموظف:" GridPane.valignment="CENTER" />
@@ -41,16 +41,22 @@
                               <TextField fx:id="salesTimeField" maxWidth="Infinity" promptText="HH:MM" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                            </children>
                         </GridPane>
-                        <VBox spacing="10.0">
+                        <VBox spacing="15.0">
                            <children>
                               <Label styleClass="form-label" text="ملاحظات:" />
-                              <TextArea fx:id="salesNotesArea" prefRowCount="3" maxHeight="80.0" promptText="أدخل الملاحظات (اختياري)" />
+                              <TextArea fx:id="salesNotesArea" prefRowCount="4" maxHeight="100.0" promptText="أدخل الملاحظات (اختياري)" />
                            </children>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
                         </VBox>
                         <HBox alignment="CENTER" spacing="15.0">
                            <children>
                               <Button fx:id="saveSalesBtn" onAction="#saveSales" prefWidth="120.0" styleClass="primary-button" text="حفظ" />
                            </children>
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
                         </HBox>
                      </children>
                   </VBox>
@@ -58,21 +64,21 @@
             </Tab>
             <Tab text="المصروفات">
                <content>
-                  <VBox spacing="15.0" styleClass="form-container">
+                  <VBox spacing="25.0" styleClass="form-container">
                      <padding>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                        <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
                      </padding>
                      <children>
-                        <GridPane hgap="15.0" vgap="15.0">
+                        <GridPane hgap="15.0" vgap="20.0">
                            <columnConstraints>
-                              <ColumnConstraints hgrow="NEVER" minWidth="120.0" prefWidth="150.0" maxWidth="200.0" />
-                              <ColumnConstraints hgrow="ALWAYS" minWidth="200.0" prefWidth="350.0" />
+                              <ColumnConstraints hgrow="NEVER" minWidth="100.0" prefWidth="130.0" maxWidth="160.0" />
+                              <ColumnConstraints hgrow="ALWAYS" minWidth="150.0" prefWidth="250.0" />
                            </columnConstraints>
                            <rowConstraints>
-                              <RowConstraints minHeight="35.0" prefHeight="40.0" vgrow="NEVER" />
-                              <RowConstraints minHeight="35.0" prefHeight="40.0" vgrow="NEVER" />
-                              <RowConstraints minHeight="35.0" prefHeight="40.0" vgrow="NEVER" />
-                              <RowConstraints minHeight="35.0" prefHeight="40.0" vgrow="NEVER" />
+                              <RowConstraints minHeight="35.0" prefHeight="45.0" vgrow="NEVER" />
+                              <RowConstraints minHeight="35.0" prefHeight="45.0" vgrow="NEVER" />
+                              <RowConstraints minHeight="35.0" prefHeight="45.0" vgrow="NEVER" />
+                              <RowConstraints minHeight="35.0" prefHeight="45.0" vgrow="NEVER" />
                            </rowConstraints>
                            <children>
                               <Label styleClass="form-label" text="الموظف:" GridPane.valignment="CENTER" />
@@ -85,16 +91,22 @@
                               <TextField fx:id="expensesTimeField" maxWidth="Infinity" promptText="HH:MM" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                            </children>
                         </GridPane>
-                        <VBox spacing="10.0">
+                        <VBox spacing="15.0">
                            <children>
                               <Label styleClass="form-label" text="ملاحظات:" />
-                              <TextArea fx:id="expensesNotesArea" prefRowCount="3" maxHeight="80.0" promptText="أدخل الملاحظات (اختياري)" />
+                              <TextArea fx:id="expensesNotesArea" prefRowCount="4" maxHeight="100.0" promptText="أدخل الملاحظات (اختياري)" />
                            </children>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
                         </VBox>
                         <HBox alignment="CENTER" spacing="15.0">
                            <children>
                               <Button fx:id="saveExpensesBtn" onAction="#saveExpenses" prefWidth="120.0" styleClass="primary-button" text="حفظ" />
                            </children>
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
                         </HBox>
                      </children>
                   </VBox>
@@ -102,21 +114,21 @@
             </Tab>
             <Tab text="الأرباح">
                <content>
-                  <VBox spacing="15.0" styleClass="form-container">
+                  <VBox spacing="25.0" styleClass="form-container">
                      <padding>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                        <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
                      </padding>
                      <children>
-                        <GridPane hgap="15.0" vgap="15.0">
+                        <GridPane hgap="20.0" vgap="25.0">
                            <columnConstraints>
                               <ColumnConstraints hgrow="NEVER" minWidth="120.0" prefWidth="150.0" maxWidth="200.0" />
                               <ColumnConstraints hgrow="ALWAYS" minWidth="200.0" prefWidth="350.0" />
                            </columnConstraints>
                            <rowConstraints>
-                              <RowConstraints minHeight="35.0" prefHeight="40.0" vgrow="NEVER" />
-                              <RowConstraints minHeight="35.0" prefHeight="40.0" vgrow="NEVER" />
-                              <RowConstraints minHeight="35.0" prefHeight="40.0" vgrow="NEVER" />
-                              <RowConstraints minHeight="35.0" prefHeight="40.0" vgrow="NEVER" />
+                              <RowConstraints minHeight="40.0" prefHeight="50.0" vgrow="NEVER" />
+                              <RowConstraints minHeight="40.0" prefHeight="50.0" vgrow="NEVER" />
+                              <RowConstraints minHeight="40.0" prefHeight="50.0" vgrow="NEVER" />
+                              <RowConstraints minHeight="40.0" prefHeight="50.0" vgrow="NEVER" />
                            </rowConstraints>
                            <children>
                               <Label styleClass="form-label" text="الموظف:" GridPane.valignment="CENTER" />
@@ -129,16 +141,22 @@
                               <TextField fx:id="profitsTimeField" maxWidth="Infinity" promptText="HH:MM" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                            </children>
                         </GridPane>
-                        <VBox spacing="10.0">
+                        <VBox spacing="15.0">
                            <children>
                               <Label styleClass="form-label" text="ملاحظات:" />
-                              <TextArea fx:id="profitsNotesArea" prefRowCount="3" maxHeight="80.0" promptText="أدخل الملاحظات (اختياري)" />
+                              <TextArea fx:id="profitsNotesArea" prefRowCount="4" maxHeight="100.0" promptText="أدخل الملاحظات (اختياري)" />
                            </children>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
                         </VBox>
                         <HBox alignment="CENTER" spacing="15.0">
                            <children>
                               <Button fx:id="saveProfitsBtn" onAction="#saveProfits" prefWidth="120.0" styleClass="primary-button" text="حفظ" />
                            </children>
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
                         </HBox>
                      </children>
                   </VBox>
@@ -147,4 +165,5 @@
          </tabs>
       </TabPane>
    </children>
+   <Label text="© 2025 Ahmad Moussa" styleClass="footer-label"/>
 </VBox>

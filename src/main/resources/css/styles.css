@@ -33,7 +33,7 @@
     -fx-font-size: 28px;
     -fx-font-weight: bold;
     -fx-text-fill: #2c3e50;
-    -fx-padding: 0 0 10 0;
+    -fx-padding: 0 0 10 15;
 }
 
 .section-title {
@@ -98,6 +98,8 @@
     -fx-cursor: hand;
     -fx-effect: dropshadow(gaussian, rgba(52,152,219,0.3), 8, 0, 0, 2);
     -fx-padding: 10 20 10 20;
+    -fx-min-width: 100px;
+    -fx-pref-width: 120px;
 }
 
 .primary-button:hover {
@@ -172,24 +174,129 @@
     -fx-padding: 20;
 }
 
-.text-field, .text-area, .combo-box, .date-picker {
+.text-field, .text-area, .date-picker {
     -fx-background-color: #ffffff;
     -fx-border-color: #bdc3c7;
     -fx-border-width: 1;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
-    -fx-padding: 8 12 8 12;
+    -fx-padding: 10 12 10 12;
     -fx-font-size: 14px;
+    -fx-min-height: 40px;
+}
+
+/* ENHANCED COMBOBOX STYLING FOR ARABIC TEXT - FULL FIX */
+.combo-box {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #bdc3c7;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 2 2 2 2;
+    -fx-font-size: 14px;
+    -fx-min-height: 55px;
+    -fx-pref-height: 55px;
+    -fx-max-height: 55px;
+}
+
+/* Text input area - critical for text display */
+.combo-box .text-input {
+    -fx-padding: 15 45 15 15;
+    -fx-text-alignment: right;
+    -fx-alignment: center-right;
+    -fx-font-size: 14px;
+    -fx-node-orientation: right-to-left;
+    -fx-min-height: 48px;
+    -fx-pref-height: 48px;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-prompt-text-fill: #7f8c8d;
+    -fx-font-family: 'Noto Sans Arabic', 'Arial Unicode MS', sans-serif;
+    -fx-font-smoothing-type: gray;
+    -fx-text-overrun: clip;
+}
+
+/* Alternative text field approach */
+.combo-box > .text-field {
+    -fx-padding: 15 45 15 15;
+    -fx-text-alignment: right;
+    -fx-alignment: center-right;
+    -fx-font-size: 14px;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+    -fx-node-orientation: right-to-left;
+    -fx-min-height: 48px;
+    -fx-pref-height: 48px;
+    -fx-prompt-text-fill: #7f8c8d;
+    -fx-font-family: 'Noto Sans Arabic', 'Arial Unicode MS', sans-serif;
+    -fx-font-smoothing-type: gray;
+    -fx-text-overrun: clip;
+}
+
+/* Prompt text styling - ensure it's visible */
+.combo-box .text-input:focused {
+    -fx-prompt-text-fill: #95a5a6;
+}
+
+/* Arrow button - keep it compact */
+.combo-box .arrow-button {
+    -fx-padding: 0 12 0 12;
+    -fx-background-color: transparent;
+    -fx-min-width: 35px;
+    -fx-pref-width: 35px;
+}
+
+.combo-box .arrow {
+    -fx-background-color: #7f8c8d;
+    -fx-shape: "M0,0 L4,6 L8,0 Z";
+    -fx-scale-shape: true;
+    -fx-pref-width: 8;
+    -fx-pref-height: 6;
+}
+
+/* ComboBox dropdown list styling - FIXED FOR ARABIC TEXT */
+.combo-box-popup .list-view {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #bdc3c7;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0, 0, 3);
+}
+
+.combo-box-popup .list-view .list-cell {
+    -fx-text-fill: #2c3e50;
+    -fx-font-size: 14px;
+    -fx-padding: 15 20 15 20;
+    -fx-text-alignment: right;
+    -fx-alignment: center-right;
+    -fx-background-color: transparent;
+    -fx-min-height: 50px;
+    -fx-pref-height: 50px;
+    -fx-max-height: 50px;
+    -fx-node-orientation: right-to-left;
+    -fx-font-family: 'Noto Sans Arabic', 'Arial Unicode MS', sans-serif;
+    -fx-font-smoothing-type: gray;
+}
+
+.combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: #f0f8ff;
+}
+
+.combo-box-popup .list-view .list-cell:selected {
+    -fx-background-color: #3498db;
+    -fx-text-fill: #ffffff;
+}
+
+/* Ensure the popup itself has proper sizing */
+.combo-box-popup {
+    -fx-min-width: 200px;
 }
 
 .text-field:focused, .text-area:focused, .combo-box:focused, .date-picker:focused {
     -fx-border-color: #3498db;
     -fx-border-width: 2;
     -fx-effect: dropshadow(gaussian, rgba(52,152,219,0.2), 5, 0, 0, 0);
-}
-
-.combo-box .list-cell {
-    -fx-text-fill: #2c3e50;
 }
 
 .date-picker .text-field {
@@ -207,12 +314,13 @@
 }
 
 .table-view .column-header {
-    -fx-background-color: linear-gradient(to bottom, #34495e, #2c3e50);
+    -fx-background-color: linear-gradient(to bottom, #4a6274, #3e5569);
     -fx-text-fill: #ffffff;
-    -fx-font-weight: 600;
+    -fx-font-weight: bold;
     -fx-font-size: 14px;
     -fx-padding: 12 8 12 8;
     -fx-alignment: CENTER;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 2, 0, 1, 1);
 }
 
 .table-view .column-header-background {
@@ -481,14 +589,33 @@
     -fx-background-color: #f39c12;
 }
 
-/* Responsive adjustments */
+.footer-label {
+    -fx-font-size: 10px;
+    -fx-text-fill: #999999;
+    -fx-opacity: 0.7;
+    -fx-alignment: center;
+}
+
+/* Enhanced Responsive Design */
+/* For screens smaller than 1200px */
 @media screen and (max-width: 1200px) {
     .page-title {
         -fx-font-size: 24px;
+        -fx-padding: 0 0 8 10;
     }
 
     .section-title {
         -fx-font-size: 16px;
+    }
+
+    .form-container {
+        -fx-padding: 15;
+    }
+
+    .primary-button {
+        -fx-padding: 8 15 8 15;
+        -fx-min-width: 90px;
+        -fx-pref-width: 100px;
     }
 
     .delete-button {
@@ -497,5 +624,121 @@
         -fx-min-width: 45px;
         -fx-pref-width: 45px;
         -fx-max-width: 45px;
+    }
+}
+
+/* For screens smaller than 900px */
+@media screen and (max-width: 900px) {
+    .page-title {
+        -fx-font-size: 20px;
+        -fx-padding: 0 0 5 10;
+    }
+
+    .form-container {
+        -fx-padding: 12;
+    }
+
+    .text-field, .text-area, .date-picker {
+        -fx-font-size: 13px;
+        -fx-padding: 8 10 8 10;
+        -fx-min-height: 35px;
+    }
+
+    .combo-box {
+        -fx-font-size: 13px;
+        -fx-padding: 2 2 2 2;
+        -fx-min-height: 50px;
+        -fx-pref-height: 50px;
+        -fx-max-height: 50px;
+    }
+
+    .combo-box .text-input,
+    .combo-box > .text-field {
+        -fx-padding: 12 40 12 12;
+        -fx-font-size: 13px;
+        -fx-min-height: 46px;
+        -fx-pref-height: 46px;
+    }
+
+    .combo-box-popup .list-view .list-cell {
+        -fx-font-size: 13px;
+        -fx-padding: 12 18 12 18;
+        -fx-min-height: 45px;
+        -fx-pref-height: 45px;
+        -fx-max-height: 45px;
+    }
+
+    .form-label {
+        -fx-font-size: 13px;
+    }
+
+    .primary-button {
+        -fx-font-size: 13px;
+        -fx-padding: 6 12 6 12;
+        -fx-min-width: 80px;
+        -fx-pref-width: 90px;
+    }
+
+    .tab {
+        -fx-font-size: 13px;
+        -fx-padding: 10 15 10 15;
+    }
+}
+
+/* For screens smaller than 600px */
+@media screen and (max-width: 600px) {
+    .page-title {
+        -fx-font-size: 18px;
+        -fx-padding: 0 0 5 8;
+    }
+
+    .form-container {
+        -fx-padding: 10;
+    }
+
+    .text-field, .text-area, .date-picker {
+        -fx-font-size: 12px;
+        -fx-padding: 6 8 6 8;
+        -fx-min-height: 32px;
+    }
+
+    .combo-box {
+        -fx-font-size: 12px;
+        -fx-padding: 2 2 2 2;
+        -fx-min-height: 47px;
+        -fx-pref-height: 47px;
+        -fx-max-height: 47px;
+    }
+
+    .combo-box .text-input,
+    .combo-box > .text-field {
+        -fx-padding: 10 35 10 10;
+        -fx-font-size: 12px;
+        -fx-min-height: 43px;
+        -fx-pref-height: 43px;
+    }
+
+    .combo-box-popup .list-view .list-cell {
+        -fx-font-size: 12px;
+        -fx-padding: 10 15 10 15;
+        -fx-min-height: 42px;
+        -fx-pref-height: 42px;
+        -fx-max-height: 42px;
+    }
+
+    .form-label {
+        -fx-font-size: 12px;
+    }
+
+    .primary-button {
+        -fx-font-size: 12px;
+        -fx-padding: 5 10 5 10;
+        -fx-min-width: 70px;
+        -fx-pref-width: 80px;
+    }
+
+    .tab {
+        -fx-font-size: 12px;
+        -fx-padding: 8 12 8 12;
     }
 }

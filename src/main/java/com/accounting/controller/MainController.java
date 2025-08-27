@@ -91,6 +91,6 @@ public class MainController implements Initializable {
     
     public void updateCurrencyDisplay() {
         CurrencyManager cm = CurrencyManager.getInstance();
-        currencyLabel.setText(cm.getCurrentCurrency() + " (1 USD = " + cm.getExchangeRate() + " LBP)");
+        currencyLabel.setText(cm.getCurrentCurrency() + " (1 Kz = " + cm.getExchangeRate() + " USD)");
     }
 }

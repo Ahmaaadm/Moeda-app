@@ -2,6 +2,7 @@ package com.accounting.controller;
 
 import com.accounting.database.DatabaseManager;
 import com.accounting.model.TransactionView;
+import com.accounting.util.CurrencyManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -9,11 +10,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
 import java.net.URL;
-import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -61,12 +60,12 @@ public class ViewDataController implements Initializable {
     @FXML private Label summaryNetProfit;
 
     private DatabaseManager dbManager;
-    private NumberFormat currencyFormat;
+    private CurrencyManager currencyManager;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         dbManager = DatabaseManager.getInstance();
-        currencyFormat = NumberFormat.getCurrencyInstance(new Locale("en", "US"));
+        currencyManager = CurrencyManager.getInstance();
 
         // Set default date range (current month)
         LocalDate now = LocalDate.now();
@@ -107,7 +106,7 @@ public class ViewDataController implements Initializable {
         timeCol.setCellValueFactory(new PropertyValueFactory<>("time"));
         notesCol.setCellValueFactory(new PropertyValueFactory<>("notes"));
 
-        // Format amount column
+        // Format amount column using CurrencyManager
         amountCol.setCellFactory(column -> new TableCell<TransactionView, Double>() {
             @Override
             protected void updateItem(Double amount, boolean empty) {
@@ -115,7 +114,8 @@ public class ViewDataController implements Initializable {
                 if (empty || amount == null) {
                     setText(null);
                 } else {
-                    setText(currencyFormat.format(amount));
+                    // Use CurrencyManager to format the amount with clean display
+                    setText(currencyManager.formatAmountClean(amount));
                 }
             }
         });
@@ -185,7 +185,7 @@ public class ViewDataController implements Initializable {
         confirmAlert.setHeaderText("حذف المعاملة");
         confirmAlert.setContentText("هل أنت متأكد من رغبتك في حذف هذه المعاملة؟\n" +
                 "الموظف: " + transaction.getEmployeeName() + "\n" +
-                "المبلغ: " + currencyFormat.format(transaction.getAmount()) + "\n" +
+                "المبلغ: " + currencyManager.formatAmountClean(transaction.getAmount()) + "\n" +
                 "التاريخ: " + transaction.getDate());
 
         // Add Arabic button text
@@ -268,16 +268,16 @@ public class ViewDataController implements Initializable {
         double totalProfits = profitsData.stream().mapToDouble(TransactionView::getAmount).sum();
         double netProfit = totalSales + totalProfits - totalExpenses;
 
-        // Update individual table totals
-        salesTotalLabel.setText("الإجمالي: " + currencyFormat.format(totalSales));
-        expensesTotalLabel.setText("الإجمالي: " + currencyFormat.format(totalExpenses));
-        profitsTotalLabel.setText("الإجمالي: " + currencyFormat.format(totalProfits));
+        // Update individual table totals using CurrencyManager with clean formatting
+        salesTotalLabel.setText("الإجمالي: " + currencyManager.formatAmountClean(totalSales));
+        expensesTotalLabel.setText("الإجمالي: " + currencyManager.formatAmountClean(totalExpenses));
+        profitsTotalLabel.setText("الإجمالي: " + currencyManager.formatAmountClean(totalProfits));
 
-        // Update summary
-        summaryTotalSales.setText(currencyFormat.format(totalSales));
-        summaryTotalExpenses.setText(currencyFormat.format(totalExpenses));
-        summaryTotalProfits.setText(currencyFormat.format(totalProfits));
-        summaryNetProfit.setText(currencyFormat.format(netProfit));
+        // Update summary using CurrencyManager with clean formatting
+        summaryTotalSales.setText(currencyManager.formatAmountClean(totalSales));
+        summaryTotalExpenses.setText(currencyManager.formatAmountClean(totalExpenses));
+        summaryTotalProfits.setText(currencyManager.formatAmountClean(totalProfits));
+        summaryNetProfit.setText(currencyManager.formatAmountClean(netProfit));
 
         // Apply styles based on values
         updateSummaryStyles(netProfit);

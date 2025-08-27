@@ -15,25 +15,62 @@ public class DatabaseManager {
     private static final String DB_URL = "jdbc:sqlite:accounting.db";
 
     private DatabaseManager() {
+        long startTime = System.currentTimeMillis();
+        System.out.println("  - DatabaseManager: Creating database connection...");
+
         try {
-            connection = DriverManager.getConnection(DB_URL);
+            // Add SQLite performance optimizations
+            connection = DriverManager.getConnection(DB_URL + "?journal_mode=WAL&synchronous=NORMAL&cache_size=10000&temp_store=memory");
+
+            // Set additional performance pragmas
+            try (Statement stmt = connection.createStatement()) {
+                stmt.execute("PRAGMA journal_mode=WAL");
+                stmt.execute("PRAGMA synchronous=NORMAL");
+                stmt.execute("PRAGMA cache_size=10000");
+                stmt.execute("PRAGMA temp_store=memory");
+                stmt.execute("PRAGMA mmap_size=268435456"); // 256MB
+            }
+
+            System.out.println("  - DatabaseManager: Connection established in " +
+                    (System.currentTimeMillis() - startTime) + "ms");
+
         } catch (SQLException e) {
+            System.err.println("  - DatabaseManager: Connection failed in " +
+                    (System.currentTimeMillis() - startTime) + "ms");
             e.printStackTrace();
         }
     }
 
     public static DatabaseManager getInstance() {
+        long startTime = System.currentTimeMillis();
+        System.out.println("  - DatabaseManager: Getting instance...");
+
         if (instance == null) {
+            System.out.println("  - DatabaseManager: Creating new instance...");
             instance = new DatabaseManager();
+        } else {
+            System.out.println("  - DatabaseManager: Using existing instance");
         }
+
+        System.out.println("  - DatabaseManager: getInstance completed in " +
+                (System.currentTimeMillis() - startTime) + "ms");
         return instance;
     }
 
     public void initializeDatabase() {
+        long startTime = System.currentTimeMillis();
+        System.out.println("  - DatabaseManager: Starting database initialization...");
+
         createTables();
+
+        System.out.println("  - DatabaseManager: Database initialization completed in " +
+                (System.currentTimeMillis() - startTime) + "ms");
     }
 
     private void createTables() {
+        long startTime = System.currentTimeMillis();
+        System.out.println("  - DatabaseManager: Creating tables...");
+
         String[] createTableQueries = {
                 """
             CREATE TABLE IF NOT EXISTS employees (
@@ -83,25 +120,53 @@ public class DatabaseManager {
         };
 
         try {
-            for (String query : createTableQueries) {
+            // Use a single transaction for all table creation
+            connection.setAutoCommit(false);
+
+            long tableCreationStart = System.currentTimeMillis();
+
+            for (int i = 0; i < createTableQueries.length; i++) {
+                long tableStart = System.currentTimeMillis();
                 try (Statement stmt = connection.createStatement()) {
-                    stmt.execute(query);
+                    stmt.execute(createTableQueries[i]);
                 }
+                System.out.println("  - DatabaseManager: Table " + (i+1) + " created in " +
+                        (System.currentTimeMillis() - tableStart) + "ms");
             }
 
+            System.out.println("  - DatabaseManager: All tables created in " +
+                    (System.currentTimeMillis() - tableCreationStart) + "ms");
+
             // Insert default settings
+            long settingsStart = System.currentTimeMillis();
             insertDefaultSettings();
+            System.out.println("  - DatabaseManager: Default settings inserted in " +
+                    (System.currentTimeMillis() - settingsStart) + "ms");
+
+            connection.commit();
+            connection.setAutoCommit(true);
 
         } catch (SQLException e) {
+            System.err.println("  - DatabaseManager: Error creating tables in " +
+                    (System.currentTimeMillis() - startTime) + "ms");
+            try {
+                connection.rollback();
+                connection.setAutoCommit(true);
+            } catch (SQLException rollbackEx) {
+                rollbackEx.printStackTrace();
+            }
             e.printStackTrace();
         }
+
+        System.out.println("  - DatabaseManager: createTables completed in " +
+                (System.currentTimeMillis() - startTime) + "ms");
     }
 
     private void insertDefaultSettings() {
         String insertSettings = """
             INSERT OR IGNORE INTO settings (key, value) VALUES 
-            ('currency', 'USD'),
-            ('exchange_rate', '89500.0')
+            ('currency', 'Kz'),
+            ('exchange_rate', '1.0')
         """;
 
         try (Statement stmt = connection.createStatement()) {
@@ -215,9 +280,7 @@ public class DatabaseManager {
         }
     }
 
-    // NEW METHOD: Delete a single transaction record
     public boolean deleteTransaction(String type, int transactionId) {
-        // Validate table type to prevent SQL injection
         if (!isValidTableType(type)) {
             System.err.println("Invalid table type: " + type);
             return false;
@@ -235,7 +298,6 @@ public class DatabaseManager {
         }
     }
 
-    // Helper method to validate table types
     private boolean isValidTableType(String type) {
         return type.equals("sales") || type.equals("expenses") || type.equals("profits");
     }
@@ -305,6 +367,9 @@ public class DatabaseManager {
     }
 
     public void closeConnection() {
+        long startTime = System.currentTimeMillis();
+        System.out.println("  - DatabaseManager: Closing connection...");
+
         try {
             if (connection != null && !connection.isClosed()) {
                 connection.close();
@@ -312,5 +377,8 @@ public class DatabaseManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        System.out.println("  - DatabaseManager: Connection closed in " +
+                (System.currentTimeMillis() - startTime) + "ms");
     }
 }
