@@ -541,8 +541,8 @@ SOFTWARE.
 **Ahmad M.** - Project Maintainer
 
 - **GitHub:** [@Ahmaaadm](https://github.com/Ahmaaadm)
-- **Email:** [your-email@example.com](mailto:your-email@example.com)
-- **LinkedIn:** [Your LinkedIn Profile](https://linkedin.com/in/your-profile)
+- **Email:** [ahmadmoussa680@gmail.com](mailto:your-email@example.com)
+- **LinkedIn:** [https://www.linkedin.com/in/ahmad-moussa-04bb0a263/](https://linkedin.com/in/your-profile)
 
 **Project Link:** [https://github.com/Ahmaaadm/Moeda-app](https://github.com/Ahmaaadm/Moeda-app)
 
